@@ -61,18 +61,12 @@ class OssecTester(object):
         self._error = False
         self._debug = False
         self._quiet = False
-        self._ossec_conf = bdir + "/etc/ossec.conf"
-        self._base_dir = bdir
         self._ossec_path = bdir + "/bin/"
         self._test_path = "./tests"
 
     def buildCmd(self, rule, alert, decoder):
-        cmd = ['%s/ossec-logtest' % (self._ossec_path), ]
+        cmd = ['%s/wazuh-logtest' % (self._ossec_path), ]
         cmd += ['-q']
-        if self._ossec_conf:
-            cmd += ["-c", self._ossec_conf]
-        if self._base_dir:
-            cmd += ["-D", self._base_dir]
         cmd += ['-U', "%s:%s:%s" % (rule, alert, decoder)]
         return cmd
 
